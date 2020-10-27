@@ -1,0 +1,48 @@
+sequenceDiagram
+  participant User
+  participant Game
+  participant Hero
+  participant Race
+  participant Map
+  participant Decision
+  participant Enemy
+  participant Item
+  participant NPC
+
+  User->>Game: create new Game
+  Game-->>User: require Hero
+  User->>Hero: get Hero
+  Hero-->>User: need Race and String name
+  User->>Race: getRaceList
+  Race-->User: Return getRaceList
+
+  activate User
+    Note left of User: select Race
+    Note left of User: select Name
+  deactivate User
+
+  User->>Hero: createHero
+  Hero-->>User: return Hero
+  User->>Game: sendHero
+  User->>Game: [send config]
+  User->>Game: Websocket - subscribe
+  Game->>Map: [generate new map]
+  loop GameLoop
+    Game->>Map: Where I am?
+    Note over Game: Get options
+    alt move
+      Game->>Map: Get possible routes
+    else found Item
+      Game->>Item: new item
+    else meet an NPC
+      Game->>NPC: new npc
+    else meet an enemy
+      Game->>Enemy: new enemy
+    else trigger event
+      Note over Game: some item, npc, enemy... can have an action triggered whe it is discovered
+    else decide
+      Game->>Decision: fight, run, pick item, talk with npc...
+    end
+
+    Game->>User: notify new state
+  end
