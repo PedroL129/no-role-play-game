@@ -1,5 +1,7 @@
+  
 sequenceDiagram
   participant User
+  participant ActiveMQ
   participant Game
   participant Hero
   participant Race
@@ -25,7 +27,7 @@ sequenceDiagram
   Hero-->>User: return Hero
   User->>Game: sendHero
   User->>Game: [send config]
-  User->>Game: Websocket - subscribe
+  Game->>User: Id for subscribe
   Game->>Map: [generate new map]
   loop GameLoop
     Game->>Map: Where I am?
@@ -44,5 +46,10 @@ sequenceDiagram
       Game->>Decision: fight, run, pick item, talk with npc...
     end
 
-    Game->>User: notify new state
+    Game->>ActiveMQ: send message
+    
+  end
+  User->>ActiveMQ: Subscribe (Id)
+  loop update client:
+    ActiveMQ-->>User: new Message
   end
