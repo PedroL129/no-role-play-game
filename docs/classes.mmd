@@ -1,0 +1,78 @@
+classDiagram
+
+Character *-- Race
+NoPlayableCharacter *-- Race
+Enemy <|-- NoPlayableCharacter
+NoPlayableCharacter *-- Event
+Map *-- Zone
+Zone *-- Biome
+Biome *-- Element
+Race <-- Element
+Item *-- Event
+Map *-- Event
+Zone *-- Event
+Biome *-- Event
+Race *-- Event
+Zone *-- Item
+Biome *-- Item
+Armor *-- Item
+Consumible *-- Item
+Weapon *-- Item
+
+
+class Armor
+
+class Consumible
+
+class Weapon
+
+class NoPlayableCharacter{
+  List~Event~ events
+}
+
+class Event {
+  int id
+}
+
+class Character{
+  String name
+  int raceId
+}
+
+class Race{
+  int raceId
+  String name
+  bool playable 
+  int health
+  int strength
+  int agility
+  List~Event~ events
+}
+
+class Item{
+  List~Event~ events
+}
+
+class Map{
+  List~Event~ events
+}
+
+class Zone{
+  List~Event~ events
+}
+
+class Biome{
+  List~Event~ events
+}
+
+class Element {
+  <<enumeration>>
+  FIRE
+  WATER
+  EARTH
+  FROST
+  LIGHTHING
+  NATURE
+}
+
+class Enemy
