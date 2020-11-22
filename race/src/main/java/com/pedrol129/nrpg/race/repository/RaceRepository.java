@@ -3,6 +3,7 @@ package com.pedrol129.nrpg.race.repository;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ import com.pedrol129.nrpg.race.entity.RaceEntity;
 @Component
 public class RaceRepository {
 
-	public ArrayList<RaceEntity> getRaces() {
+	public List<RaceEntity> getRaces() {
 		ArrayList<RaceEntity> races = null;
 
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());

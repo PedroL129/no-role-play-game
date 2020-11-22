@@ -9,10 +9,14 @@
 # intelligence
 # energy
 # 
-- name: Human
+- id: 1
+  name: Human
 
-- name: Orc
+- id: 2
+  name: Orc
 
-- name: Elf
+- id: 3
+  name: Elf
 
-- name: Dwarf
+- id: 4
+  name: Dwarf

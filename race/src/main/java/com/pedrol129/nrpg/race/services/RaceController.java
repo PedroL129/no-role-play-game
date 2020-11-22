@@ -1,6 +1,6 @@
 package com.pedrol129.nrpg.race.services;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ public class RaceController {
 	private RaceRepository raceRepository;
 
 	@GetMapping("/race")
-	public ArrayList<RaceEntity> getRaces(){
+	public List<RaceEntity> getRaces(){
 		return this.raceRepository.getRaces();
 	}
 }
