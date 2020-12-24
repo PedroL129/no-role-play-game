@@ -11,6 +11,7 @@
         <module>game</module>
         <module>hero</module>
         <module>race</module>
+        <module>map</module>
     </modules>
 
     <dependencyManagement>
