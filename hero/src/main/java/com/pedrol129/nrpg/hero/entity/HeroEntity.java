@@ -1,6 +1,6 @@
 package com.pedrol129.nrpg.hero.entity;
 
-import com.pedrol129.nrpg.race.entity.RaceEntity;
+import com.pedrol129.nrpg.raceclient.model.RaceEntity;
 
 public class HeroEntity {
 	public String name;

@@ -22,7 +22,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.pedrol129.nrpg</groupId>
-			<artifactId>race</artifactId>
+			<artifactId>race-api-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
@@ -56,6 +56,12 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.5.0</version>
 		</dependency>
 	</dependencies>
 

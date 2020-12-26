@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pedrol129.nrpg.hero.entity.HeroEntity;
 import com.pedrol129.nrpg.hero.repository.HeroRepository;
-import com.pedrol129.nrpg.race.entity.RaceEntity;
+import com.pedrol129.nrpg.raceclient.model.RaceEntity;
 
 @RestController
 public class HeroController {

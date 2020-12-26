@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pedrol129.nrpg.game.batch.GameProcessor;
-import com.pedrol129.nrpg.hero.entity.HeroEntity;
+import com.pedrol129.nrpg.heroclient.model.HeroEntity;
 
 @RestController
 public class GameController {

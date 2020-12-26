@@ -23,12 +23,18 @@
 
 		<dependency>
 			<groupId>com.pedrol129.nrpg</groupId>
-			<artifactId>race</artifactId>
+			<artifactId>race-api-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.pedrol129.nrpg</groupId>
-			<artifactId>hero</artifactId>
+			<artifactId>hero-api-client</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.pedrol129.nrpg</groupId>
+			<artifactId>map-api-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
