@@ -1,5 +1,7 @@
 package com.pedrol129.nrpg.game.batch;
 
+import javax.annotation.PreDestroy;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import com.pedrol129.nrpg.mapclient.invoker.ApiException;
 @Service
 public class GameProcessor {
 	private static final Logger log = LoggerFactory.getLogger(GameProcessor.class);
+	private boolean play = true; 
 
 	@Autowired
 	MapControllerApi mapApi;
@@ -22,7 +25,7 @@ public class GameProcessor {
 
 		int count = 0;
 
-		while (count < 100) {
+		while (play && count < 100) {
 			log.debug("Count: {} Hero: {}", count, hero.toString());
 			count++;
 			try {
@@ -37,5 +40,10 @@ public class GameProcessor {
 
 	private void getMap() throws ApiException {
 		log.info(this.mapApi.getMaps().toString());
+	}
+	
+	@PreDestroy
+	private void preDestroy() {
+		this.play = false;
 	}
 }

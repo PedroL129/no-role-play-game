@@ -1,0 +1,6 @@
+- id: 1
+  name: weapon
+- id: 2
+  name: shield
+- id: 3
+  name: healer

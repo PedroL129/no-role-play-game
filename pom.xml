@@ -12,6 +12,7 @@
         <module>hero</module>
         <module>race</module>
         <module>map</module>
+        <module>item</module>
     </modules>
 
     <dependencyManagement>

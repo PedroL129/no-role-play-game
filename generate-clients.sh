@@ -46,4 +46,19 @@ java -jar openapi-generator-cli.jar generate \
 
 mvn -f ./tmp/hero-api-client/pom.xml install
 
+java -jar openapi-generator-cli.jar generate \
+  -i ./item/src/main/resources/api.json \
+  --api-package com.pedrol129.nrpg.itemclient.api \
+  --model-package com.pedrol129.nrpg.itemclient.model \
+  --invoker-package com.pedrol129.nrpg.itemclient.invoker \
+  --group-id com.pedrol129.nrpg \
+  --artifact-id item-api-client \
+  --artifact-version 0.0.1-SNAPSHOT \
+  -g java \
+  --additional-properties useOptional=true,java8=true,hideGenerationTimestamp=true \
+  --library native \
+  -o tmp/item-api-client
+
+mvn -f ./tmp/item-api-client/pom.xml install
+
 rm -r tmp
