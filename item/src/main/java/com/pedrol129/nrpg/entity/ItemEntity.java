@@ -1,10 +1,11 @@
 package com.pedrol129.nrpg.entity;
 
-import lombok.Getter;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-@Getter
+@Schema(subTypes = {WeaponEntity.class})
 public class ItemEntity {
-    protected Integer id;
+	
+	protected Integer id;
     protected String name;
     
     protected Integer idType;

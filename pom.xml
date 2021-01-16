@@ -13,6 +13,7 @@
         <module>race</module>
         <module>map</module>
         <module>item</module>
+        <module>enemy</module>
     </modules>
 
     <dependencyManagement>
