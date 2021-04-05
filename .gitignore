@@ -22,7 +22,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 .project
-.settings/org.eclipse.m2e.core.prefs
 
 target/
 pom.xml.tag
@@ -35,42 +34,7 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
-.settings/org.eclipse.buildship.core.prefs
-.settings/org.eclipse.jdt.core.prefs
-.vscode/launch.json
-.gradle/6.3/gc.properties
-.gradle/6.3/executionHistory/executionHistory.lock
-.gradle/6.3/fileChanges/last-build.bin
-.gradle/6.3/fileHashes/fileHashes.lock
-.gradle/buildOutputCleanup/buildOutputCleanup.lock
-.gradle/buildOutputCleanup/cache.properties
-.gradle/checksums/checksums.lock
-.gradle/vcs-1/gc.properties
-.vscode/settings.json
-enemy/.settings/org.eclipse.core.resources.prefs
-enemy/.settings/org.eclipse.jdt.apt.core.prefs
-enemy/.settings/org.eclipse.jdt.core.prefs
-enemy/.settings/org.eclipse.m2e.core.prefs
-enemy/.settings/org.springframework.ide.eclipse.prefs
-enemy/.classpath
-game/.settings/org.eclipse.core.resources.prefs
-game/.settings/org.eclipse.jdt.apt.core.prefs
-game/.settings/org.eclipse.jdt.core.prefs
-game/.settings/org.eclipse.m2e.core.prefs
-game/.settings/org.springframework.ide.eclipse.prefs
-.gitignore
-game/.classpath
-game/.factorypath
-item/.settings/org.eclipse.core.resources.prefs
-item/.settings/org.eclipse.jdt.apt.core.prefs
-item/.settings/org.eclipse.jdt.core.prefs
-item/.settings/org.eclipse.m2e.core.prefs
-item/.settings/org.springframework.ide.eclipse.prefs
-item/.classpath
-map/.classpath
-item/.factorypath
-map/.settings/org.eclipse.core.resources.prefs
-map/.settings/org.eclipse.jdt.apt.core.prefs
-map/.settings/org.eclipse.jdt.core.prefs
-map/.settings/org.eclipse.m2e.core.prefs
-map/.settings/org.springframework.ide.eclipse.prefs
+.vscode/
+.settings/
+.classpath
+.factorypath

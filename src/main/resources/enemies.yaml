@@ -1,0 +1,7 @@
+- name: RandomEnemy
+  raceId: 2
+  level: 1
+  life: 50
+  attack: 10
+  defense: 10
+  

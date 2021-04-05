@@ -1,7 +1,0 @@
-- id: 1
-  name: mainMap
-  zones: 
-    - biome: 
-        name: Forest
-    - biome: 
-        name: Cave
