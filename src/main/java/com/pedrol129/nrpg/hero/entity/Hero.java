@@ -1,13 +1,10 @@
 package com.pedrol129.nrpg.hero.entity;
 
-import java.util.List;
-
 import com.github.freva.asciitable.AsciiTable;
-import com.pedrol129.nrpg.item.entity.WeaponEntity;
+import com.pedrol129.nrpg.Character;
 import com.pedrol129.nrpg.race.entity.Race;
 
 import lombok.Getter;
-import com.pedrol129.nrpg.Character;
 
 @Getter
 public class Hero extends Character {

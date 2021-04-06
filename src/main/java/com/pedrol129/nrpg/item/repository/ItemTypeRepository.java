@@ -10,32 +10,25 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.pedrol129.nrpg.item.entity.TypeItemEntity;
+import com.pedrol129.nrpg.item.entity.ItemType;
 
-public class TypeItemRepository {
-	public List<TypeItemEntity> getTypes() {
-		ArrayList<TypeItemEntity> types = null;
+public class ItemTypeRepository {
+	public List<ItemType> getTypes() {
+		ArrayList<ItemType> types = null;
 
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
 		mapper.findAndRegisterModules();
-		CollectionType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, TypeItemEntity.class);
+		CollectionType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, ItemType.class);
 
-		File file = new File("src/main/resources/type.yaml");
+		File file = new File("src/main/resources/item_types.yaml");
 
 		try {
 			types = mapper.readValue(file, type);
-		} catch (JsonParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		} 
 		return types;
 	}
 }

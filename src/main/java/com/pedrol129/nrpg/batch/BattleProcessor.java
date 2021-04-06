@@ -18,7 +18,8 @@ public class BattleProcessor {
 			log.info("{} has {} points of life", hero.getName(), hero.getLife());
 			log.info("{} has {} points of life", enemy.getName(), enemy.getLife());
 			
-			Character atk, def;
+			Character atk;
+			Character def;
 
 			if (yourTurn) {
 				atk = hero;
@@ -39,6 +40,7 @@ public class BattleProcessor {
 				Thread.sleep(1500);
 			} catch (InterruptedException e) {
 				log.error("Error while sleep thread", e);
+				Thread.currentThread().interrupt();
 			}
 		}
 
@@ -54,7 +56,7 @@ public class BattleProcessor {
 	}
 
 	public static int getDamage(Character atk, Character def) {
-		int damage = atk.getAttack() - def.getDefense();
+		int damage = atk.getCombinedAttack() - def.getCombinedDefense();
 
 		if (damage < 0) {
 			damage = 0;

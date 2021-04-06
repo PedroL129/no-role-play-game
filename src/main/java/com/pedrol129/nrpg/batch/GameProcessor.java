@@ -17,51 +17,39 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class GameProcessor {
-	private boolean play = true;
+
+	private Hero hero = null;
+	int posY;
+	int posX;
+	int[][] generatedMap;
 
 	public void run() {
 
-		Hero hero = Intro.getHero();
-
+		hero = Intro.getHero();
+		
 		log.info(hero.toString());
 
-		int[][] generatedMap = MapController.generateMap();
+		generatedMap = MapController.generateMap();
 
-		int posY = new Random().nextInt(generatedMap.length);
-		int posX = new Random().nextInt(generatedMap[posY].length);
+		posY = new Random().nextInt(generatedMap.length);
+		posX = new Random().nextInt(generatedMap[posY].length);
 
 		while (hero.getLife() > 0) {
 			Zone zone = ZoneRepository.getZone(generatedMap[posY][posX]);
 			log.info("I am in {} - Y:{}, X:{}", zone,posY,posX);
+			
+			this.somethingHappend();
+			
 			try {
 				Thread.sleep(1500);
 			} catch (InterruptedException e) {
 				log.error("Error while sleep thread", e);
-			}
-			
-			if (MapController.meetAnEnemy(zone)) {
-				Enemy enemy = EnemyRepository.getEnemies().get(0);
-			
-				boolean youWin = BattleProcessor.fight(hero, enemy);
-				if(youWin) {
-					hero.addExperience(20);
-				}else {
-					break;
-				}
-			}
-
-			int nextY = this.moveTo(posY);
-			int nextX = this.moveTo(posX);
-			
-			if(generatedMap.length > nextY && generatedMap[nextY].length > nextX){
-				posX = nextX;
-				posY = nextY;
-			}
+			}		
 		}
 	}
 
-	private int moveTo(int i) {
-		List<Integer> givenList = Arrays.asList(i, i + 1, i - 1);
+	private int moveTo(int position) {
+		List<Integer> givenList = Arrays.asList(position, position + 1, position - 1);
 		Random rand = new Random();
 		int randomElement = givenList.get(rand.nextInt(givenList.size()));
 		
@@ -70,5 +58,45 @@ public class GameProcessor {
 		}
 	
 		return randomElement;
+	}
+	
+	private void somethingHappend() {
+		// 1- nothing happens, keep walking
+		// 2- meet an enemy
+		// 3- found object -- TODO
+		// 4- trigger event -- TODO
+		
+		int whatHappends = new Random().nextInt(3);
+		
+		switch (whatHappends) {
+		case 1:
+			int nextY = this.moveTo(posY);
+			int nextX = this.moveTo(posX);
+			
+			if(generatedMap.length > nextY && generatedMap[nextY].length > nextX){
+				posX = nextX;
+				posY = nextY;
+			}
+			break;
+		case 2:
+			Zone zone = ZoneRepository.getZone(generatedMap[posY][posX]);
+			if (MapController.meetAnEnemy(zone)) {
+				Enemy enemy = EnemyRepository.getEnemies().get(0);
+			
+				boolean youWin = BattleProcessor.fight(hero, enemy);
+				if(youWin) {
+					hero.addExperience(20);
+				}
+			}
+			break;
+		case 3:
+			// TODO
+			break;
+		case 4:
+			// TODO
+			break;
+		default:
+			break;
+		}
 	}
 }
