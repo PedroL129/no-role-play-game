@@ -1,0 +1,15 @@
+- id: 1
+  name: skin
+  idType: 4
+- id: 2
+  name: blunt knife
+  idType: 1
+  attack: 11
+- id: 3
+  name: iron sword
+  idType: 1
+  attack: 15
+- id: 4
+  name: shield
+  idType: 2
+  defense: 10

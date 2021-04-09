@@ -9,15 +9,18 @@ import com.pedrol129.nrpg.Character;
 @Log4j2
 public class BattleProcessor {
 
-	public static boolean fight(Hero hero, Enemy enemy) {
+	public boolean fight(Hero hero, Enemy enemy) {
 		boolean yourTurn = true;
 
 		log.info("You fight agains {}", enemy.getName());
+		log.info(" _______  __    _______  __    __  .___________.\r\n"
+				+ "|   ____||  |  /  _____||  |  |  | |           |\r\n"
+				+ "|  |__   |  | |  |  __  |  |__|  | `---|  |----`\r\n"
+				+ "|   __|  |  | |  | |_ | |   __   |     |  |     \r\n"
+				+ "|  |     |  | |  |__| | |  |  |  |     |  |     \r\n"
+				+ "|__|     |__|  \\______| |__|  |__|     |__|");
 
-		while (hero.getLife() > 0 && enemy.getLife() > 0) {
-			log.info("{} has {} points of life", hero.getName(), hero.getLife());
-			log.info("{} has {} points of life", enemy.getName(), enemy.getLife());
-			
+		while (hero.getLife() > 0 && enemy.getLife() > 0) {			
 			Character atk;
 			Character def;
 
@@ -31,7 +34,7 @@ public class BattleProcessor {
 
 			int damage = getDamage(atk, def);
 
-			log.info("{} recive {} of damage", def.getName(), damage);
+			log.info("{} recive {} of damage. {} HP", def.getName(), damage, def.getLife());
 			def.damage(damage);
 
 			yourTurn = !yourTurn;
@@ -55,7 +58,7 @@ public class BattleProcessor {
 		}
 	}
 
-	public static int getDamage(Character atk, Character def) {
+	public int getDamage(Character atk, Character def) {
 		int damage = atk.getCombinedAttack() - def.getCombinedDefense();
 
 		if (damage < 0) {

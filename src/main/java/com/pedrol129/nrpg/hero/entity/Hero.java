@@ -5,7 +5,9 @@ import com.pedrol129.nrpg.Character;
 import com.pedrol129.nrpg.race.entity.Race;
 
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Getter
 public class Hero extends Character {
 	private int experience;
@@ -21,7 +23,7 @@ public class Hero extends Character {
 		this.defense = 10;
 		this.experience = 0;
 		this.evolution = 2.25f;
-		this.nextLevel = 100;
+		this.nextLevel = 30;
 	}
 
 	public void addExperience(int exp) {
@@ -29,7 +31,9 @@ public class Hero extends Character {
 		if (this.experience >= this.nextLevel) {
 			this.experience -= this.nextLevel;
 			this.nextLevel = this.nextLevel * this.evolution;
+			this.level ++;
 		}
+		log.info("You need {} exp for level up", this.nextLevel - this.experience);
 	}
 
 	@Override

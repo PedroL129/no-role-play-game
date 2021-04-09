@@ -4,3 +4,5 @@
   name: shield
 - id: 3
   name: healer
+- id: 4
+  name: random

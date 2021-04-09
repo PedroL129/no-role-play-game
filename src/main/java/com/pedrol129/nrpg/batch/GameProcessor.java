@@ -3,11 +3,13 @@ package com.pedrol129.nrpg.batch;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import com.pedrol129.nrpg.cli.Intro;
 import com.pedrol129.nrpg.enemy.entity.Enemy;
 import com.pedrol129.nrpg.enemy.repository.EnemyRepository;
 import com.pedrol129.nrpg.hero.entity.Hero;
+import com.pedrol129.nrpg.item.entity.Item;
 import com.pedrol129.nrpg.map.controller.MapController;
 import com.pedrol129.nrpg.map.entity.Zone;
 import com.pedrol129.nrpg.map.repository.ZoneRepository;
@@ -83,10 +85,16 @@ public class GameProcessor {
 			if (MapController.meetAnEnemy(zone)) {
 				Enemy enemy = EnemyRepository.getEnemies().get(0);
 			
-				boolean youWin = BattleProcessor.fight(hero, enemy);
+				BattleProcessor battle = new BattleProcessor();
+				boolean youWin = battle.fight(hero, enemy);
 				if(youWin) {
+					log.info("You win {} exp", 20);
 					hero.addExperience(20);
+					log.info("You found {}", enemy.getInventory().stream().map(Item::getName).collect(Collectors.joining(",")));
+					hero.getInventory().addAll(enemy.getInventory());
 				}
+				
+				log.info(hero.toString());
 			}
 			break;
 		case 3:

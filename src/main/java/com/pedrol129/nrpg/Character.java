@@ -33,9 +33,7 @@ public class Character {
 	}
 
 	public void damage(int damage) {
-		log.info(this.life);
 		this.life -= damage;
-		log.info(this.life);
 	}
 
 	public Race getRace() {
