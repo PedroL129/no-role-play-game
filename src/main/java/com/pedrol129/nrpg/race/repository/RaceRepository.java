@@ -8,7 +8,6 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.pedrol129.nrpg.map.entity.Biome;
 import com.pedrol129.nrpg.race.entity.Race;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RaceRepository {
 
+	private RaceRepository() {
+
+	}
+
 	public static List<Race> getRaces() {
-		ArrayList<Race> races = null;
+		ArrayList<Race> races = new ArrayList<>();
 
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
@@ -51,10 +54,10 @@ public class RaceRepository {
 			log.error("Error at reading races", e);
 		}
 
-		if(races == null) {
+		if (races == null) {
 			return null;
 		}
-		
+
 		return races.stream().filter(r -> r.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
 	}
 

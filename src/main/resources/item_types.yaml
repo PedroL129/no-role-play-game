@@ -1,7 +1,13 @@
 - id: 1
   name: weapon
+  positions:
+    - left-hand
+    - right-hand
 - id: 2
   name: shield
+  positions:
+    - left-hand
+    - right-hand
 - id: 3
   name: healer
 - id: 4

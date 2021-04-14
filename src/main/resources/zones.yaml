@@ -1,5 +1,7 @@
 - id: 1
   biomeId: 1
   enemyRate: 100
+  name: Grey Forest
 - id: 2
   biomeId: 2
+  name: The Old Tunnel

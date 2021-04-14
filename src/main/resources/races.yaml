@@ -9,14 +9,47 @@
 # intelligence
 # energy
 # 
+
 - id: 1
   name: Human
+  equipation:
+    - left-hand
+    - right-hand
+    - head
+    - body
+    - legs
+    - feet
 
 - id: 2
   name: Orc
+  equipation:
+    - left-hand
+    - right-hand
+    - head
+    - body
+    - legs
+    - feet
 
 - id: 3
   name: Elf
+  equipation:
+    - left-hand
+    - right-hand
+    - head
+    - body
+    - legs
+    - feet
 
 - id: 4
   name: Dwarf
+  equipation:
+    - left-hand
+    - right-hand
+    - head
+    - body
+    - legs
+    - feet
+
+- id: 5
+  name: Wolf
+  intelligence: 0

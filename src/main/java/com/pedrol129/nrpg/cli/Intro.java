@@ -21,7 +21,7 @@ public class Intro {
 		log.info("...");
 
 		Race race = getRace();
-		
+
 		return new Hero(name, race);
 	}
 
@@ -31,9 +31,11 @@ public class Intro {
 		Scanner scanner = new Scanner(System.in);
 		while (name.isBlank()) {
 			log.info("What's your name?");
-			name = "Tupac"; //scanner.next().trim();
+			name = "Tupac"; // scanner.next().trim();
 
 		}
+
+		scanner.close();
 
 		return name;
 	}
@@ -48,13 +50,13 @@ public class Intro {
 		while (race == null) {
 			log.info("Choose one the followed options");
 			log.info(RaceRepository.getRaces().toString());
-			String raceName = "Human"; //scanner.next().trim();
+			String raceName = "Human"; // scanner.next().trim();
 			race = RaceRepository.getRaceByName(raceName);
 		}
-
+		scanner.close();
 
 		log.info("Oh! I've never see a one of your...");
-		
+
 		log.info("kind");
 		return race;
 	}

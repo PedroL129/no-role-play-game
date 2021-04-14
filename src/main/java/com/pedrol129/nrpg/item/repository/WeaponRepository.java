@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,8 +14,13 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.pedrol129.nrpg.item.entity.Item;
 import com.pedrol129.nrpg.item.entity.Weapon;
 
-@JsonTypeInfo( use = Id.NONE)
+@JsonTypeInfo(use = Id.NONE)
 public class WeaponRepository {
+
+	private WeaponRepository() {
+
+	}
+
 	public static List<Item> getWeapons() {
 		ArrayList<Item> weapons = new ArrayList<>();
 

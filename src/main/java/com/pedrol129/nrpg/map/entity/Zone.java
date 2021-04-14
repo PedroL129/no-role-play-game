@@ -9,6 +9,7 @@ import lombok.ToString;
 @ToString
 public class Zone {
 	private int id;
+	private String name;
 	private int biomeId;
 	private Biome biome;
 	private int enemyRate = 30;

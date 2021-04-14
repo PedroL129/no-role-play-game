@@ -12,10 +12,14 @@ import com.pedrol129.nrpg.race.entity.Race;
 import com.pedrol129.nrpg.race.repository.RaceRepository;
 
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 
 @Getter
 @Log4j2
+@ToString
+@Setter
 public class Character {
 	protected String name;
 	protected int raceId;
@@ -28,8 +32,8 @@ public class Character {
 	protected Map<String, Item> equipped;
 	
 	public Character() {
-		this.inventory = new ArrayList<Item>();
-		this.equipped = new HashMap<String, Item>();
+		this.inventory = new ArrayList<>();
+		this.equipped = new HashMap<>();
 	}
 
 	public void damage(int damage) {

@@ -1,9 +1,14 @@
-- name: RandomEnemy
-  raceId: 2
-  level: 1
-  life: 25
-  attack: 1
+- name: Common Wolf
+  raceId: 5
+  minLevel: 1
+  maxLevel: 5
+  attack: 2
   defense: 1
+  life: 25
+  coefAttack: 0.1 
+  coefDefense: 0.05
   defaultInventory:
+    - 1
+  biomes:
     - 1
   

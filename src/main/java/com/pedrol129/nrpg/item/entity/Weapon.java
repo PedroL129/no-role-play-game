@@ -5,4 +5,7 @@ import lombok.Getter;
 @Getter
 public class Weapon extends Item {
 	private int attack;
+	private boolean twoHanded = true;
+	
+	
 }

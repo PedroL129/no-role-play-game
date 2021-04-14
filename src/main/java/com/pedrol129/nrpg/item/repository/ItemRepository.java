@@ -16,6 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ItemRepository {
 
+	private ItemRepository() {
+
+	}
+
 	public static List<Item> getItems() {
 		ArrayList<Item> items = new ArrayList<>();
 
@@ -34,8 +38,8 @@ public class ItemRepository {
 
 		return items;
 	}
-	
-	public static List<Item> getItems(List<Integer> ids){
+
+	public static List<Item> getItems(List<Integer> ids) {
 		return getItems().stream().filter(item -> ids.contains(item.getId())).collect(Collectors.toList());
 	}
 }

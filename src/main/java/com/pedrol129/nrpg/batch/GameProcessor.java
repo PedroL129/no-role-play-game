@@ -1,5 +1,6 @@
 package com.pedrol129.nrpg.batch;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -16,9 +17,10 @@ import com.pedrol129.nrpg.map.repository.ZoneRepository;
 
 import lombok.extern.log4j.Log4j2;
 
-
 @Log4j2
 public class GameProcessor {
+
+	private Random rand = new SecureRandom();
 
 	private Hero hero = null;
 	int posY;
@@ -28,7 +30,7 @@ public class GameProcessor {
 	public void run() {
 
 		hero = Intro.getHero();
-		
+
 		log.info(hero.toString());
 
 		generatedMap = MapController.generateMap();
@@ -38,44 +40,44 @@ public class GameProcessor {
 
 		while (hero.getLife() > 0) {
 			Zone zone = ZoneRepository.getZone(generatedMap[posY][posX]);
-			log.info("I am in {} - Y:{}, X:{}", zone,posY,posX);
-			
+			log.info("I am in {} - Y:{}, X:{}", zone.getName(), posY, posX);
+
 			this.somethingHappend();
-			
+
 			try {
 				Thread.sleep(1500);
 			} catch (InterruptedException e) {
 				log.error("Error while sleep thread", e);
-			}		
+				Thread.currentThread().interrupt();
+			}
 		}
 	}
 
 	private int moveTo(int position) {
 		List<Integer> givenList = Arrays.asList(position, position + 1, position - 1);
-		Random rand = new Random();
-		int randomElement = givenList.get(rand.nextInt(givenList.size()));
-		
-		if(randomElement < 0) {
+		int randomElement = givenList.get(this.rand.nextInt(givenList.size()));
+
+		if (randomElement < 0) {
 			randomElement = 0;
 		}
-	
+
 		return randomElement;
 	}
-	
+
 	private void somethingHappend() {
 		// 1- nothing happens, keep walking
 		// 2- meet an enemy
 		// 3- found object -- TODO
 		// 4- trigger event -- TODO
-		
+
 		int whatHappends = new Random().nextInt(3);
-		
+
 		switch (whatHappends) {
 		case 1:
 			int nextY = this.moveTo(posY);
 			int nextX = this.moveTo(posX);
-			
-			if(generatedMap.length > nextY && generatedMap[nextY].length > nextX){
+
+			if (generatedMap.length > nextY && generatedMap[nextY].length > nextX) {
 				posX = nextX;
 				posY = nextY;
 			}
@@ -83,17 +85,18 @@ public class GameProcessor {
 		case 2:
 			Zone zone = ZoneRepository.getZone(generatedMap[posY][posX]);
 			if (MapController.meetAnEnemy(zone)) {
-				Enemy enemy = EnemyRepository.getEnemies().get(0);
-			
+				Enemy enemy = EnemyRepository.getEnemyByBiome(zone.getBiomeId());
+
 				BattleProcessor battle = new BattleProcessor();
 				boolean youWin = battle.fight(hero, enemy);
-				if(youWin) {
+				if (youWin) {
 					log.info("You win {} exp", 20);
 					hero.addExperience(20);
-					log.info("You found {}", enemy.getInventory().stream().map(Item::getName).collect(Collectors.joining(",")));
+					log.info("You found {}",
+							enemy.getInventory().stream().map(Item::getName).collect(Collectors.joining(",")));
 					hero.getInventory().addAll(enemy.getInventory());
 				}
-				
+
 				log.info(hero.toString());
 			}
 			break;

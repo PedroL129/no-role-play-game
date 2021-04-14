@@ -1,8 +1,6 @@
 package com.pedrol129.nrpg;
 
 import com.pedrol129.nrpg.batch.GameProcessor;
-import com.pedrol129.nrpg.item.repository.ItemRepository;
-import com.pedrol129.nrpg.item.repository.WeaponRepository;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -21,6 +19,7 @@ public class Game {
 
 		GameProcessor batch = new GameProcessor();
 		batch.run();
+
 	}
 
 }
