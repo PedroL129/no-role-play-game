@@ -6,7 +6,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
+
 import com.pedrol129.nrpg.cli.Intro;
+import com.pedrol129.nrpg.decision.DecisionService;
+import com.pedrol129.nrpg.decision.DecisionType;
 import com.pedrol129.nrpg.enemy.entity.Enemy;
 import com.pedrol129.nrpg.enemy.repository.EnemyRepository;
 import com.pedrol129.nrpg.hero.entity.Hero;
@@ -20,6 +27,9 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class GameProcessor {
 
+	@Autowired
+	DecisionService decisionService;
+
 	private Random rand = new SecureRandom();
 
 	private Hero hero = null;
@@ -28,6 +38,8 @@ public class GameProcessor {
 	int[][] generatedMap;
 
 	public void run() {
+		
+		this.decisionService.setType(DecisionType.AUTO);
 
 		hero = Intro.getHero();
 
