@@ -2,8 +2,11 @@ package com.pedrol129.nrpg.hero.entity;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.github.freva.asciitable.AsciiTable;
 import com.pedrol129.nrpg.Character;
+import com.pedrol129.nrpg.decision.DecisionService;
 import com.pedrol129.nrpg.item.entity.Item;
 import com.pedrol129.nrpg.item.entity.Weapon;
 import com.pedrol129.nrpg.race.entity.Race;
@@ -17,6 +20,9 @@ public class Hero extends Character {
 	private int experience;
 	private float evolution;
 	private float nextLevel;
+	
+	@Autowired
+	private DecisionService decisionService;
 
 	public Hero(String name, Race race) {
 		this.name = name;
@@ -58,29 +64,7 @@ public class Hero extends Character {
 
 	public void addItemToInventory(Item item) {
 		if (item.canBeEquiped()) {
-			List<String> positions = item.getType().getPositions();
-
-			switch (item.getIdType()) {
-			case 1:
-				Weapon witem = (Weapon) item;
-
-				if (witem.isTwoHanded()) {
-					// If both hands are empty, equip them
-					// else If the sum of attack && defense of equipped items are less than the
-					// attack, equip them
-				} else {
-					// If one hand are empty, equip them
-					// else replace for one item, if the attack or defense are less
-					// if the equipped item is a two handed weapon, check if the inventory contains
-					// another weapon or shield to equip
-				}
-
-				break;
-
-			default:
-				break;
-			}
-
+			this.decisionService.getDecision().chooseItem(this, item);
 		} else {
 			this.inventory.add(item);
 		}

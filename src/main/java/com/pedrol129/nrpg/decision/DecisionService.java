@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.Getter;
 
-@Service
 @Getter
+@Service
 public class DecisionService {
 
 	private DecisionType type = DecisionType.AUTO;
