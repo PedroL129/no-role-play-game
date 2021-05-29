@@ -6,4 +6,9 @@ import lombok.Getter;
 public class Shield extends Item {
 
 	private int defense;
+
+	@Override
+	public int getPoints() {
+		return this.defense;
+	}
 }

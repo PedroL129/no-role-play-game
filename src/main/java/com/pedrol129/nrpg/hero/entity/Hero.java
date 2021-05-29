@@ -1,5 +1,6 @@
 package com.pedrol129.nrpg.hero.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class Hero extends Character {
 	private int experience;
 	private float evolution;
 	private float nextLevel;
-	
+
 	@Autowired
 	private DecisionService decisionService;
 
@@ -62,11 +63,36 @@ public class Hero extends Character {
 		return AsciiTable.getTable(headers, data);
 	}
 
-	public void addItemToInventory(Item item) {
-		if (item.canBeEquiped()) {
-			this.decisionService.getDecision().chooseItem(this, item);
-		} else {
-			this.inventory.add(item);
+	public void addItemsToInventory(Item[] items) {
+		for (Item item : items) {
+			if (item.canBeEquiped()) {
+				this.decisionService.getDecision().foundItems(this, items);
+			} else {
+				this.inventory.add(item);
+			}
 		}
+	}
+
+	public void equip(List<String> positions, Item next) {
+		for (String position : positions) {
+			String previousUID = this.equipped.get(position);
+			if (previousUID != null) {
+				int index = this.equippedItems.indexOf(previousUID);
+				Item previous = this.equippedItems.get(index);
+				this.inventory.add(previous);
+				this.equippedItems.remove(previous);
+				List<String> positionsToRemove = new ArrayList<>();
+				this.equipped.forEach((k, v) -> {
+					if (v.equals(previousUID)) {
+						positionsToRemove.add(k);
+					}
+				});
+
+				positionsToRemove.forEach(p -> this.equipped.remove(p));
+			}
+		}
+
+		this.equippedItems.add(next);
+		positions.forEach(pos -> this.equipped.put(pos, next.getUniqueID()));
 	}
 }

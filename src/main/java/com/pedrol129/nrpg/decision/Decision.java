@@ -5,6 +5,6 @@ import com.pedrol129.nrpg.item.entity.Item;
 
 public interface Decision {
 	
-	public void chooseItem(Hero hero, Item item);
+	public void foundItems(Hero hero, Item[] items);
 	
 }

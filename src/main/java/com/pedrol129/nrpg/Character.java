@@ -19,21 +19,40 @@ import lombok.extern.log4j.Log4j2;
 @Getter
 @Log4j2
 @ToString
-@Setter
 public class Character {
 	protected String name;
 	protected int raceId;
 	protected Race race;
 	protected int life;
 	protected int level;
+
+	// Deprecated
 	protected int attack;
 	protected int defense;
-	protected List<Item> inventory;
-	protected Map<String, Item> equipped;
+	protected int magicAttack;
+	protected int magicDefense;
 	
+	// Physical attributes
+	protected int strength;
+	protected int vitality;
+	protected int resistance;
+
+	// Mental attributes 
+	protected int dextery;
+	protected int intelligence;
+	protected int charisma;
+	protected int wisdom;
+	protected int willpower;
+	protected int perception;
+	
+	protected List<Item> inventory;
+	protected List<Item> equippedItems;
+	protected Map<String, String> equipped;
+
 	public Character() {
 		this.inventory = new ArrayList<>();
 		this.equipped = new HashMap<>();
+		this.equippedItems = new ArrayList<Item>();
 	}
 
 	public void damage(int damage) {
@@ -51,7 +70,7 @@ public class Character {
 	public int getCombinedDefense() {
 		int combinedDefense = this.defense;
 
-		for (Item item : this.equipped.values()) {
+		for (Item item : this.equippedItems) {
 			if (item.getIdType() == 2) {
 				combinedDefense += ((Shield) item).getDefense();
 			}
@@ -63,12 +82,23 @@ public class Character {
 	public int getCombinedAttack() {
 		int combinedAttack = this.attack;
 
-		for (Item item : this.equipped.values()) {
+		for (Item item : this.equippedItems) {
 			if (item.getIdType() == 1) {
 				combinedAttack += ((Weapon) item).getAttack();
 			}
 		}
 
 		return combinedAttack;
+	}
+
+	public void equipItem(Item item, String[] positions) {
+		this.equippedItems.add(item);
+		for (String position : positions) {
+			this.equipped.put(position, item.getUniqueID());
+		}
+	}
+
+	public Item getEquippedItemByUID(String uid) {
+		return this.equippedItems.stream().filter(item -> item.getUniqueID().equals(uid)).findFirst().orElseGet(null);
 	}
 }

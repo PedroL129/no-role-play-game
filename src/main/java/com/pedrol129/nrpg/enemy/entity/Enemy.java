@@ -84,7 +84,7 @@ public class Enemy extends Character {
 			this.inventory.forEach(item -> {
 				if (item.getIdType() == 1 || item.getIdType() == 2) {
 					// replace the key for the position
-					this.equipped.put(String.valueOf(item.getId()), item);
+					this.equipped.put(String.valueOf(item.getId()), item.getUniqueID());
 				}
 			});
 		}

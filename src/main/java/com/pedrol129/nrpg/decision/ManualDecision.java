@@ -11,14 +11,15 @@ public class ManualDecision implements Decision {
 	 */
 	private int debounce;
 
-	@Override
-	public void chooseItem(Hero hero, Item item) {
-		// TODO Auto-generated method stub
-
-	}
 
 	public ManualDecision(int debounce) {
 		this.debounce = debounce;
+	}
+
+	@Override
+	public void foundItems(Hero hero, Item[] items) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
