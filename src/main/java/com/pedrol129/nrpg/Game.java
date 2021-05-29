@@ -7,11 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.pedrol129.nrpg.batch.GameProcessor;
-import com.pedrol129.nrpg.decision.AutoDecision;
-import com.pedrol129.nrpg.hero.entity.Hero;
-import com.pedrol129.nrpg.item.entity.Item;
-import com.pedrol129.nrpg.item.repository.ItemRepository;
-import com.pedrol129.nrpg.race.repository.RaceRepository;
 
 import lombok.extern.log4j.Log4j2;
 

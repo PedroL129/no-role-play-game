@@ -17,6 +17,8 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Item {
+	private static final int POSITIONS_REQUIRED = 1;
+	private static final int POINTS = 0;
 	protected String uniqueID;
 	protected int[] equipables = { 1, 2 };
 
@@ -42,11 +44,11 @@ public class Item {
 	}
 
 	public int getPoints() {
-		return 0;
+		return POINTS;
 	}
 
 	public int getPositionsRequired() {
-		return 1;
+		return POSITIONS_REQUIRED;
 	}
 
 	@Override

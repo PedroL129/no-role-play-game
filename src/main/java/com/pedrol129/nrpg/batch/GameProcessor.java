@@ -10,19 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pedrol129.nrpg.cli.Intro;
-import com.pedrol129.nrpg.decision.AutoDecision;
 import com.pedrol129.nrpg.decision.DecisionService;
 import com.pedrol129.nrpg.decision.DecisionType;
 import com.pedrol129.nrpg.enemy.entity.Enemy;
 import com.pedrol129.nrpg.enemy.repository.EnemyRepository;
 import com.pedrol129.nrpg.hero.entity.Hero;
 import com.pedrol129.nrpg.item.entity.Item;
-import com.pedrol129.nrpg.item.entity.Weapon;
-import com.pedrol129.nrpg.item.repository.ItemRepository;
 import com.pedrol129.nrpg.map.controller.MapController;
 import com.pedrol129.nrpg.map.entity.Zone;
 import com.pedrol129.nrpg.map.repository.ZoneRepository;
-import com.pedrol129.nrpg.race.repository.RaceRepository;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -109,10 +105,7 @@ public class GameProcessor {
 					hero.addExperience(20);
 					log.info("You found {}",
 							enemy.getInventory().stream().map(Item::getName).collect(Collectors.joining(",")));
-					hero.getInventory().addAll(enemy.getInventory());
-					for (Item newItem : enemy.getInventory()) {
-
-					}
+					this.decisionService.getDecision().foundItems(hero, enemy.getInventory());
 				}
 
 				log.info(hero.toString());

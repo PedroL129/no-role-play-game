@@ -16,8 +16,9 @@ public class AutoDecision implements Decision {
 		itemFilters = Arrays.asList(new FreePositionsFilter());
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void foundItems(Hero hero, Item[] items) {
+	public void foundItems(Hero hero, List<Item> items) {
 		for (Item item : items) {
 			boolean exit = false;
 			for (ItemFilter filter : this.itemFilters) {

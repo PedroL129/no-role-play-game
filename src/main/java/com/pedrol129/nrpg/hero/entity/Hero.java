@@ -9,7 +9,6 @@ import com.github.freva.asciitable.AsciiTable;
 import com.pedrol129.nrpg.Character;
 import com.pedrol129.nrpg.decision.DecisionService;
 import com.pedrol129.nrpg.item.entity.Item;
-import com.pedrol129.nrpg.item.entity.Weapon;
 import com.pedrol129.nrpg.race.entity.Race;
 
 import lombok.Getter;
@@ -61,16 +60,6 @@ public class Hero extends Character {
 		String[][] data = { { "Level", String.valueOf(this.level), "Life", String.valueOf(this.life) } };
 
 		return AsciiTable.getTable(headers, data);
-	}
-
-	public void addItemsToInventory(Item[] items) {
-		for (Item item : items) {
-			if (item.canBeEquiped()) {
-				this.decisionService.getDecision().foundItems(this, items);
-			} else {
-				this.inventory.add(item);
-			}
-		}
 	}
 
 	public void equip(List<String> positions, Item next) {
