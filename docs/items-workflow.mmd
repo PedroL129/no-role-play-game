@@ -1,0 +1,20 @@
+graph TD
+    A[Found Items] --> |For each| Item
+    Item --> C{Have free positions}
+    C --> |Yes| Equip
+    C --> |No| D{Type}
+    D --> |Weapon| E{More powerfull then the weak weapon}
+    E --> |Yes| Equip
+    E --> |No| F{Best combination  with inventory items}
+    F --> |No| End
+    F --> |Yes| Equip
+    C --> |Armor| G{More powerfull then the armor equiped}
+    G --> |Yes| Equip
+    G --> |No| F
+    C --> |Shield| H{Have other shield equipped}
+    H --> |Yes| I{More powerful then then the weak shield}
+    I --> |Yes| Equip
+    I --> |No| F
+    H --> |No| J{Can be equiped with a weapon}
+    J --> note[[Example: Found a shield, but you only have a two-hand weapon]]
+    J --> |Yes| E

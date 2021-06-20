@@ -21,7 +21,7 @@ public class AutoDecision implements Decision {
 	@Override
 	public void foundItems(Hero hero, List<Item> items) {
 		for (Item item : items) {
-			boolean exit = false;
+			var exit = false;
 			for (ItemFilter filter : this.itemFilters) {
 				boolean canInvocate = filter.getClass().getDeclaredMethods()[0].getParameters()[1].getType()
 						.isAssignableFrom(item.getClass());
