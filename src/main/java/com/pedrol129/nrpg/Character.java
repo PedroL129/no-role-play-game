@@ -90,8 +90,19 @@ public class Character {
 
 		return combinedAttack;
 	}
+	
+	public List<String> getPositionsByItemUID(String uid){
+		List<String> positions = new ArrayList<String>();
+		this.equipped.forEach((k,v) -> {
+			if(v.equals(uid)) {
+				positions.add(k);
+			}
+		});
+		
+		return positions;
+	}
 
-	public void equipItem(Item item, String[] positions) {
+	private void equipItem(Item item, String[] positions) {
 		this.equippedItems.add(item);
 		for (String position : positions) {
 			this.equipped.put(position, item.getUniqueID());

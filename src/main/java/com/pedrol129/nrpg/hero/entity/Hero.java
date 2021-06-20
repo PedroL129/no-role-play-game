@@ -53,6 +53,10 @@ public class Hero extends Character {
 		}
 		log.info("You need {} exp for level up", this.nextLevel - this.experience);
 	}
+	
+	public int getItemPoints(Item item) {
+		return item.getPoints();
+	}
 
 	@Override
 	public String toString() {

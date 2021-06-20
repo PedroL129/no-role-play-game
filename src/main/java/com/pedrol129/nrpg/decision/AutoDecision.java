@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.pedrol129.nrpg.decision.auto.filter.FreePositionsFilter;
 import com.pedrol129.nrpg.decision.auto.filter.ItemFilter;
+import com.pedrol129.nrpg.decision.auto.filter.WeakWeaponComparission;
 import com.pedrol129.nrpg.hero.entity.Hero;
 import com.pedrol129.nrpg.item.entity.Item;
 
@@ -13,7 +14,7 @@ public class AutoDecision implements Decision {
 	private List<ItemFilter<? extends Item>> itemFilters;
 
 	public AutoDecision() {
-		itemFilters = Arrays.asList(new FreePositionsFilter());
+		itemFilters = Arrays.asList(new FreePositionsFilter(), new WeakWeaponComparission());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -35,5 +36,5 @@ public class AutoDecision implements Decision {
 			}
 		}
 	}
-
+	
 }
