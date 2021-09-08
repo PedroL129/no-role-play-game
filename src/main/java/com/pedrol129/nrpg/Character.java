@@ -47,6 +47,10 @@ public class Character {
 	
 	protected List<Item> inventory;
 	protected List<Item> equippedItems;
+	
+	/**
+	 * Map of Position, itemUID
+	 */
 	protected Map<String, String> equipped;
 
 	public Character() {

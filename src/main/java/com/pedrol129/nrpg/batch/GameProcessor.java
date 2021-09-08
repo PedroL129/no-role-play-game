@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pedrol129.nrpg.cli.Intro;
+import com.pedrol129.nrpg.comunication.Communication;
+import com.pedrol129.nrpg.comunication.CommunicationCLI;
 import com.pedrol129.nrpg.decision.DecisionService;
 import com.pedrol129.nrpg.decision.DecisionType;
 import com.pedrol129.nrpg.enemy.entity.Enemy;
@@ -23,11 +24,11 @@ import com.pedrol129.nrpg.map.repository.ZoneRepository;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@Service
 public class GameProcessor {
 
-	@Autowired
 	DecisionService decisionService;
+
+	Communication communication;
 
 	private Random rand = new SecureRandom();
 
@@ -36,31 +37,37 @@ public class GameProcessor {
 	int posX;
 	int[][] generatedMap;
 
+	public GameProcessor() {
+		this.decisionService = new DecisionService();
+		this.communication= new CommunicationCLI();
+	}
+	
 	public void run() {
 
 		this.decisionService.setType(DecisionType.AUTO);
 
-		hero = Intro.getHero();
+		hero = new Intro().getHero();
 
 		log.info(hero.toString());
 
 		generatedMap = MapController.generateMap();
 
-		posY = new Random().nextInt(generatedMap.length);
-		posX = new Random().nextInt(generatedMap[posY].length);
+		posX = new Random().nextInt(generatedMap.length);
+		posY = new Random().nextInt(generatedMap[posX].length);
 
 		while (hero.getLife() > 0) {
 			Zone zone = ZoneRepository.getZone(generatedMap[posY][posX]);
 			log.info("I am in {} - Y:{}, X:{}", zone.getName(), posY, posX);
 
-			this.somethingHappend();
+			this.triggerEvent();
 
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				log.error("Error while sleep thread", e);
 				Thread.currentThread().interrupt();
-			}
+			}*/
+			this.communication.sendAndReceive("Continue?");
 		}
 	}
 
@@ -75,7 +82,7 @@ public class GameProcessor {
 		return randomElement;
 	}
 
-	private void somethingHappend() {
+	private void triggerEvent() {
 		// 1- nothing happens, keep walking
 		// 2- meet an enemy
 		// 3- found object -- TODO

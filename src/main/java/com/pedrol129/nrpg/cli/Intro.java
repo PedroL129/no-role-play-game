@@ -1,63 +1,51 @@
 package com.pedrol129.nrpg.cli;
 
-import java.util.Scanner;
-
+import com.pedrol129.nrpg.comunication.Communication;
+import com.pedrol129.nrpg.comunication.CommunicationCLI;
 import com.pedrol129.nrpg.hero.entity.Hero;
 import com.pedrol129.nrpg.race.entity.Race;
 import com.pedrol129.nrpg.race.repository.RaceRepository;
 
-import lombok.extern.log4j.Log4j2;
-
-@Log4j2
 public class Intro {
 
-	public static Hero getHero() {
+	private Communication communication;
+	
+	public Intro() {
+		this.communication = new CommunicationCLI();
+	}
+	
+	public Hero getHero() {
 		String name = getHeroName();
 
-		log.info("Hello {}", name);
+		this.communication.send(String.format("Hello %s", name));
 
-		log.info("I've never see you around before");
+		this.communication.send("I've never see you around before");
 
-		log.info("...");
+		this.communication.send("...");
 
-		Race race = getRace();
+		var race = getRace();
 
 		return new Hero(name, race);
 	}
 
-	private static String getHeroName() {
-		String name = "";
-
-		Scanner scanner = new Scanner(System.in);
-		while (name.isBlank()) {
-			log.info("What's your name?");
-			name = "Tupac"; // scanner.next().trim();
-
-		}
-
-		scanner.close();
-
-		return name;
+	private String getHeroName() {
+		return this.communication.sendAndReceive("What's your name?");
 	}
 
-	public static Race getRace() {
-		log.info("You don't look like you are around here");
-		log.info("What are you?");
+	public Race getRace() {
+		this.communication.send("You don't look like you are around here");
+		this.communication.send("What are you?");
+
 		Race race = null;
 
-		Scanner scanner = new Scanner(System.in);
-
 		while (race == null) {
-			log.info("Choose one the followed options");
-			log.info(RaceRepository.getRaces().toString());
-			String raceName = "Human"; // scanner.next().trim();
+			var raceName = this.communication.sendAndReceive(RaceRepository.getRaces().toString());
 			race = RaceRepository.getRaceByName(raceName);
 		}
-		scanner.close();
 
-		log.info("Oh! I've never see a one of your...");
+		this.communication.send("Oh! I've never see a one of your...");
 
-		log.info("kind");
+		this.communication.send("kind");
 		return race;
 	}
 }

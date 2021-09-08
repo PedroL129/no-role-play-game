@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public class ItemType {
+public class ItemType {	
 	private Integer id;
 	private String name;
 	private List<String> positions;

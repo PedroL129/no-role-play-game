@@ -2,39 +2,54 @@ package com.pedrol129.nrpg.decision;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-import com.pedrol129.nrpg.decision.auto.filter.FreePositionsFilter;
-import com.pedrol129.nrpg.decision.auto.filter.ItemFilter;
-import com.pedrol129.nrpg.decision.auto.filter.WeakWeaponComparission;
+import com.pedrol129.nrpg.decision.auto.FoundItems;
 import com.pedrol129.nrpg.hero.entity.Hero;
 import com.pedrol129.nrpg.item.entity.Item;
+import com.pedrol129.nrpg.item.entity.ItemTypeEnum;
 
 public class AutoDecision implements Decision {
 
-	private List<ItemFilter<? extends Item>> itemFilters;
-
 	public AutoDecision() {
-		itemFilters = Arrays.asList(new FreePositionsFilter(), new WeakWeaponComparission());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void foundItems(Hero hero, List<Item> items) {
 		for (Item item : items) {
-			var exit = false;
-			for (ItemFilter filter : this.itemFilters) {
-				boolean canInvocate = filter.getClass().getDeclaredMethods()[0].getParameters()[1].getType()
-						.isAssignableFrom(item.getClass());
+			if (!item.canBeEquiped())
+				continue;
 
-				if (canInvocate) {
-					exit = filter.filter(hero, item);
+			Map<String, String[]> itemsToEquip = FoundItems.haveFreePositions(item, hero);
+			if (itemsToEquip.isEmpty())
+				continue;
 
-					if (exit) {
-						break;
-					}
-				}
+			var type = ItemTypeEnum.valueOf(item.getIdType());
+			switch (type) {
+			case WEAPON:
+			case ARMOR:
+				itemsToEquip = FoundItems.powerfulThanWeakEquipedItem(item, hero);
+				break;
+			case SHIELD:
+				itemsToEquip = FoundItems.powerfulThanWeakEquipedItem(item, hero);
+				boolean haveWeapon = FoundItems.haveWeaponEquiped(hero, item, itemsToEquip);
+				break;
+			default:
+				break;
+			}
+
+			if (itemsToEquip.isEmpty()) {
+				itemsToEquip = FoundItems.convinationsWithInventory(item, hero);
+			}
+			
+			if(!itemsToEquip.isEmpty()) {
+				itemsToEquip.forEach((uid, positions) ->  {
+					Item itemToEquip = item.getUniqueID().equals(uid) ? item: hero.getEquippedItemByUID(uid);
+					hero.equip(Arrays.asList(positions), itemToEquip);
+				});
 			}
 		}
 	}
-	
+
 }

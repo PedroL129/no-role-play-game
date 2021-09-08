@@ -1,11 +1,8 @@
 package com.pedrol129.nrpg.decision;
 
-import org.springframework.stereotype.Service;
-
 import lombok.Getter;
 
 @Getter
-@Service
 public class DecisionService {
 
 	private DecisionType type = DecisionType.AUTO;
